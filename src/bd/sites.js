@@ -6,7 +6,7 @@ const sites = {
     url: 'https://pulpocon.es/',
   },
   bilbostack: {
-    url: 'https://bilbostack.org/',
+    url: 'https://bilbostack.com/',
   },
 };
 

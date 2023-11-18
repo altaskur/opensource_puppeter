@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 import sites from './bd/sites.js';
 
-const getPulpConEvent = async (page) => {
+const getPulpConEvent = async (browser) => {
+  const page = await browser.newPage();
   await page.goto(sites.pulpoCon.url);
   await page.setViewport({ width: 1080, height: 1024 });
   console.log('searching into:', page.url());
@@ -12,7 +13,7 @@ const getPulpConEvent = async (page) => {
     const elements = document.querySelectorAll(el);
     return elements[0].textContent;
   }, 'head > title');
-
+  await page.close();
   return result;
 };
 
