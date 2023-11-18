@@ -1,0 +1,14 @@
+{
+    "site":{
+        "urL": "",
+        "event_date":"",
+        "url":"",
+        "last_fetch":"",
+        "status":"",
+        "data_origin":""
+    },
+    "user":{
+        "email":"",
+        "subscriptios":""
+    }
+}
