@@ -6,7 +6,7 @@ const getBilboEvent = async (page) => {
     return elements[0].textContent;
   }, 'p.lead');
 
-  return createNewEvent({ title: 'bilbostack', eventDate: result }, { name: 'bilbostack', url: page.url() });
+  return createNewEvent({ title: 'bilbostack', eventDate: result }, { name: 'bilbostack', url: page.url(), type: 'BilbaoStack' });
 };
 
 export default getBilboEvent;

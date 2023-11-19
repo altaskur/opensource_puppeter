@@ -19,6 +19,7 @@ const createNewEvent = (data, site) => {
     url: site.url,
     site: site.name,
     createdAt: new Date(),
+    siteType: site.type,
   };
   return event;
 };

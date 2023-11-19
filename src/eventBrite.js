@@ -15,9 +15,8 @@ const getEventbrite = async (page) => {
 
     return events;
   }, 'section.discover-horizontal-event-card');
-  const events = result.map((event) => createNewEvent(event, { name: 'Eventbrite', url: page.url() }));
+  const events = result.map((event) => createNewEvent(event, { name: 'Eventbrite', url: page.url(), type: 'EventBrite' }));
 
-  console.log(events);
   return events;
 };
 
