@@ -7,9 +7,20 @@ const parseDate = (dateString) => {
   try {
     return format(formattedDate, 'yyyy-MM-dd');
   } catch (error) {
-    console.log('Error parsing date: ', dateString);
     return dateString;
   }
 };
 
-export default parseDate;
+const createNewEvent = (data, site) => {
+  const event = {
+    eventDate: parseDate(data.dateTime),
+    title: data.title,
+    hostName: data.hostName,
+    url: site.url,
+    site: site.name,
+    createdAt: new Date(),
+  };
+  return event;
+};
+
+export { parseDate, createNewEvent };

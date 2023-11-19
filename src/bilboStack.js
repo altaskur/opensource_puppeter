@@ -1,10 +1,12 @@
+import { createNewEvent } from './utils/utils.js';
+
 const getBilboEvent = async (page) => {
   const result = await page.evaluate((el) => {
     const elements = document.querySelectorAll(el);
     return elements[0].textContent;
   }, 'p.lead');
 
-  return result;
+  return createNewEvent({ title: 'bilbostack', eventDate: result }, { name: 'bilbostack', url: page.url() });
 };
 
 export default getBilboEvent;

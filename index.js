@@ -5,7 +5,7 @@ import getPulpConEvent from './src/pulpoCon.js';
 import getBilboEvent from './src/bilboStack.js';
 import sites from './src/bd/sites.js';
 import searchNewPage from './src/newPage.js';
-import parseDate from './src/utils.js';
+import getEventbrite from './src/eventBrite.js';
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -14,26 +14,14 @@ import parseDate from './src/utils.js';
   });
 
   const meetUpData = await searchNewPage(browser, sites.meetUp.url, getMeetUpEvents);
-  const meetUpDataParsed = meetUpData.map((event) => (
-    { ...event, dateTime: parseDate(event.dateTime) }
-  ));
 
   const pulpConData = await searchNewPage(browser, sites.pulpoCon.url, getPulpConEvent);
-  const pulpConDataParsed = {
-    dateTime: parseDate(pulpConData.split('y')[1].trim()),
-    title: 'PulpCon',
-    hostName: 'PulpCon',
-  };
+
   const bilboData = await searchNewPage(browser, sites.bilbostack.url, getBilboEvent);
-  const bilboDataParsed = {
-    dateTime: parseDate(bilboData.split(',')[0].trim()),
-    title: 'BilboStack',
-    hostName: 'BilboStack',
-  };
 
-  const events = [...meetUpDataParsed, pulpConDataParsed, bilboDataParsed];
+  const eventbrite = await searchNewPage(browser, sites.eventBrite.url, getEventbrite);
 
-  console.log(events);
+  const events = [...meetUpData, pulpConData, bilboData, ...eventbrite];
 
   await browser.close();
 })();

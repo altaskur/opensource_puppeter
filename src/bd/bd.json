@@ -1,10 +1,10 @@
 {
     "site":{
-        "urL": "",
         "event_date":"",
         "url":"",
         "last_fetch":"",
         "status":"",
+        "date":"",
         "data_origin":""
     },
     "user":{

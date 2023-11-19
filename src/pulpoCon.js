@@ -1,10 +1,12 @@
+import { createNewEvent } from './utils/utils.js';
+
 const getPulpConEvent = async (page) => {
   const result = await page.evaluate((el) => {
     const elements = document.querySelectorAll(el);
     const rawData = elements[0].textContent;
     return rawData;
   }, 'head > title');
-  return result;
+  return createNewEvent({ title: 'pulpoconf', eventDate: result }, { name: 'pulpoConf', page: page.url() });
 };
 
 export default getPulpConEvent;
