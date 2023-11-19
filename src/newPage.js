@@ -1,9 +1,11 @@
+import logger from "./utils/logger.js";
+
 const searchNewPage = async (browser, url, getDataFunction) => {
   try {
     const page = await browser.newPage();
     await page.goto(url);
     await page.setViewport({ width: 1080, height: 1024 });
-    console.log('searching into:', page.url());
+    logger.info("searching into:", page.url());
 
     // here the function
     let result = [];
@@ -13,7 +15,7 @@ const searchNewPage = async (browser, url, getDataFunction) => {
     await page.close();
     return result;
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return error;
   }
 };

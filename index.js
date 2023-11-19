@@ -5,7 +5,8 @@ import getPulpConEvent from './src/pulpoCon.js';
 import getBilboEvent from './src/bilboStack.js';
 import sites from './src/bd/sites.js';
 import searchNewPage from './src/newPage.js';
-import parseDate from './src/utils.js';
+import parseDate from './src/utils/index.js';
+import { saveEvents } from './src/services/conferences.js';
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -23,7 +24,7 @@ import parseDate from './src/utils.js';
 
   const events = [...meetUpDataParsed, pulpConData, bilboData];
 
-  console.log(events);
+  saveEvents(events);
 
   await browser.close();
 })();
