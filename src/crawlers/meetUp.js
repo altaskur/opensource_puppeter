@@ -1,4 +1,4 @@
-import { createNewEvent } from './utils/utils.js';
+import { createNewEvent } from '../utils/utils.js';
 
 const getMeetUpEvents = async (page) => {
   const result = await page.evaluate((el) => {
