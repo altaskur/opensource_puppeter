@@ -17,7 +17,7 @@ const getMeetUpEvents = async (page) => {
     return events;
   }, '[data-recommendationid]');
 
-  return result.map((event) => createNewEvent(event, { name: 'MeetUp', url: page.url() }));
+  return result.map((event) => createNewEvent(event, { name: 'MeetUp', url: page.url(), type: 'MeetUp' }));
 };
 
 export default getMeetUpEvents;

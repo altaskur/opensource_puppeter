@@ -1,16 +1,18 @@
 import chalk from "chalk";
 
+const { log } = console;
+
 export default {
   info: (...args) => {
-    console.log(chalk.blue(...args));
+    log(chalk.blue(...args));
   },
   error: (...args) => {
-    console.log(chalk.red(...args));
+    log(chalk.red(...args));
   },
   warning: (...args) => {
-    console.log(chalk.yellow(...args));
+    log(chalk.yellow(...args));
   },
   success: (...args) => {
-    console.log(chalk.green(...args));
+    log(chalk.green(...args));
   },
 };

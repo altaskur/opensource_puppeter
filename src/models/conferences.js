@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const ConferencesSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  name: String,
+  title: String,
+  eventDate: String,
   urls: [
     {
       url: String,
@@ -12,4 +13,4 @@ const ConferencesSchema = new Schema({
   ],
 });
 
-export default mongoose.model("Conferences", ConferencesSchema);
+export default mongoose.model('Conferences', ConferencesSchema);
