@@ -7,6 +7,7 @@ import sites from './src/bd/sites.js';
 import searchNewPage from './src/newPage.js';
 import parseDate from './src/utils/index.js';
 import { saveEvents } from './src/services/conferences.js';
+import getEventbrite from './src/eventBrite.js';
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -15,15 +16,14 @@ import { saveEvents } from './src/services/conferences.js';
   });
 
   const meetUpData = await searchNewPage(browser, sites.meetUp.url, getMeetUpEvents);
-  const meetUpDataParsed = meetUpData.map((event) => (
-    { ...event, dateTime: parseDate(event.dateTime) }
-  ));
 
   const pulpConData = await searchNewPage(browser, sites.pulpoCon.url, getPulpConEvent);
+
   const bilboData = await searchNewPage(browser, sites.bilbostack.url, getBilboEvent);
 
-  const events = [...meetUpDataParsed, pulpConData, bilboData];
+  const eventbrite = await searchNewPage(browser, sites.eventBrite.url, getEventbrite);
 
+  const events = [...meetUpData, pulpConData, bilboData, ...eventbrite];
   saveEvents(events);
 
   await browser.close();

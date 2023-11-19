@@ -1,23 +1,24 @@
 import { createNewEvent } from './utils/utils.js';
 
-const getMeetUpEvents = async (page) => {
+const getEventbrite = async (page) => {
   const result = await page.evaluate((el) => {
     const elements = document.querySelectorAll(el);
 
     const events = [];
     elements.forEach((element) => {
       const event = {
-        dateTime: element.querySelector('time').textContent,
+        dateTime: element.querySelector('p').textContent,
         title: element.querySelector('h2').textContent,
-        hostName: element.querySelector('p.line-clamp-1').textContent.split(':')[1].trim(),
       };
       events.push(event);
     });
 
     return events;
-  }, '[data-recommendationid]');
+  }, 'section.discover-horizontal-event-card');
+  const events = result.map((event) => createNewEvent(event, { name: 'Eventbrite', url: page.url() }));
 
-  return result.map((event) => createNewEvent(event, { name: 'MeetUp', url: page.url() }));
+  console.log(events);
+  return events;
 };
 
-export default getMeetUpEvents;
+export default getEventbrite;
