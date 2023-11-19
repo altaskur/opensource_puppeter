@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import { connectDatabase } from "../utils/db.js";
-import logger from "../utils/logger.js";
-import Conferences from "../models/conferences.js";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import { connectDatabase } from '../utils/db.js';
+import logger from '../utils/logger.js';
+import Conferences from '../models/conferences.js';
 
 export const saveEvents = async (events) => {
   const mergedEvents = events.reduce((acc, event) => {
@@ -36,19 +36,17 @@ export const saveEvents = async (events) => {
 
   const records = mergedEvents
     .filter(
-      (event) =>
-        !existingEvents.find(
-          (existingEvent) => existingEvent.title === event.title
-        )
+      (event) => !existingEvents.find(
+        (existingEvent) => existingEvent.title === event.title,
+      ),
     )
     .map(
-      (eventData) =>
-        new Conferences({
-          _id: new mongoose.Types.ObjectId(),
-          title: eventData.title,
-          urls: eventData.urls,
-          eventDate: eventData.eventDate,
-        })
+      (eventData) => new Conferences({
+        _id: new mongoose.Types.ObjectId(),
+        title: eventData.title,
+        urls: eventData.urls,
+        eventDate: eventData.eventDate,
+      }),
     );
 
   logger.info(`Saving ${records.length} events`);
