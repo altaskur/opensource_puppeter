@@ -1,17 +1,19 @@
 /* eslint-disable import/extensions */
 import puppeteer from 'puppeteer';
+import dotenv from 'dotenv';
 import getMeetUpEvents from './src/meetUp.js';
 import getPulpConEvent from './src/pulpoCon.js';
 import getBilboEvent from './src/bilboStack.js';
 import sites from './src/bd/sites.js';
 import searchNewPage from './src/newPage.js';
-import parseDate from './src/utils/index.js';
 import { saveEvents } from './src/services/conferences.js';
 import getEventbrite from './src/eventBrite.js';
 
+dotenv.config();
+
 (async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     slowMo: 250,
   });
 
