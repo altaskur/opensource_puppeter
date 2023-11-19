@@ -8,6 +8,9 @@ const sites = {
   bilbostack: {
     url: 'https://bilbostack.com/',
   },
+  eventBrite: {
+    url: 'https://www.eventbrite.es/d/spain--elda/science-and-tech--events/conferencias-de-programaci%C3%B3n/?page=1',
+  },
 };
 
 export default sites;
