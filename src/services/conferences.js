@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { connectDatabase } from "../utils/db.js";
+import logger from "../utils/logger.js";
 import Conferences from "../models/conferences.js";
 import mongoose from "mongoose";
 
@@ -28,12 +29,30 @@ export const saveEvents = async (events) => {
   }, []);
 
   await connectDatabase();
-  const records = mergedEvents.map((eventData) => new Conferences({
-    _id: new mongoose.Types.ObjectId(),
-    title: eventData.title,
-    urls: eventData.urls,
-    eventDate: eventData.eventDate,
-  }));
+
+  const existingEvents = await Conferences.find({
+    title: { $in: mergedEvents.map((event) => event.title) },
+  });
+
+  const records = mergedEvents
+    .filter(
+      (event) =>
+        !existingEvents.find(
+          (existingEvent) => existingEvent.title === event.title
+        )
+    )
+    .map(
+      (eventData) =>
+        new Conferences({
+          _id: new mongoose.Types.ObjectId(),
+          title: eventData.title,
+          urls: eventData.urls,
+          eventDate: eventData.eventDate,
+        })
+    );
+
+  logger.info(`Saving ${records.length} events`);
+  records.forEach((record) => logger.info(`Saving ${record.title}`));
 
   await Conferences.insertMany(records);
 };
