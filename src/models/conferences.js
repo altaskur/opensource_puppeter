@@ -7,10 +7,10 @@ const ConferencesSchema = new Schema({
   eventDate: String,
   urls: [
     {
+      eventType: String,
       url: String,
-      type: String,
     },
   ],
 });
 
-export default mongoose.model('Conferences', ConferencesSchema);
+export default mongoose.model("Conferences", ConferencesSchema);
