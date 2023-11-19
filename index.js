@@ -19,9 +19,19 @@ import parseDate from './src/utils.js';
   ));
 
   const pulpConData = await searchNewPage(browser, sites.pulpoCon.url, getPulpConEvent);
+  const pulpConDataParsed = {
+    dateTime: parseDate(pulpConData.split('y')[1].trim()),
+    title: 'PulpCon',
+    hostName: 'PulpCon',
+  };
   const bilboData = await searchNewPage(browser, sites.bilbostack.url, getBilboEvent);
+  const bilboDataParsed = {
+    dateTime: parseDate(bilboData.split(',')[0].trim()),
+    title: 'BilboStack',
+    hostName: 'BilboStack',
+  };
 
-  const events = [...meetUpDataParsed, pulpConData, bilboData];
+  const events = [...meetUpDataParsed, pulpConDataParsed, bilboDataParsed];
 
   console.log(events);
 
